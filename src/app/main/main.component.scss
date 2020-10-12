@@ -1,0 +1,33 @@
+.main {
+  height: 100%;
+  background-image: url("../../assets/main-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  &__content {
+    width: 65vw;
+    text-align: right;
+    padding-top: 10%;
+    padding-right: 2em;
+    h1 {
+      font: bold 50px Rubik;
+      text-align: right;
+      letter-spacing: 3.5px;
+      color: #FDD000;
+      text-transform: uppercase;
+    }
+    p {
+      text-align: right;
+      font: normal 30px Rubik;
+      letter-spacing: 0.6px;
+      color: #DFDFDF;
+    }
+  }
+  &__calendar {
+    width: 35vw;
+    background-color: #272829;
+    height: 100%;
+  }
+}

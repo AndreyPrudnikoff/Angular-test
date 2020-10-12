@@ -1,0 +1,44 @@
+header {
+  padding: 0 10%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  height: 10vh;
+  nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 5em;
+    li {
+      text-transform: uppercase;
+      list-style: none;
+      a {
+        text-decoration: none;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 0.56px;
+        color: #3D3D3D;
+        text-transform: uppercase;
+        position: relative;
+      }
+      a.active:before {
+        content: "";
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #FDD000;
+        position: absolute;
+        bottom: -1rem;
+        left: calc(50% - 7.5px);
+      }
+    }
+  }
+}
+.wrap-logo {
+  width: 10vw;
+  img {
+    width: 100%;
+  }
+}
+
+
