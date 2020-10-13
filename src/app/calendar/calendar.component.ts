@@ -1,18 +1,18 @@
-import {Component, OnInit, Pipe, PipeTransform} from '@angular/core'
+import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 
 export class CalendarDay {
-  public date: Date
-  public title: string
-  public isPasteDate: boolean
-  public isToday: boolean
+  public date: Date;
+  public title: string;
+  public isPasteDate: boolean;
+  public isToday: boolean;
 
-  public getDateString() {
-    return this.date.toISOString().split("T")[0]
+  public getDateString(): string {
+    return this.date.toISOString().split('T')[0];
   }
   constructor(d: Date) {
-    this.date = d
-    this.isPasteDate = d.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0)
-    this.isToday = d.setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0)
+    this.date = d;
+    this.isPasteDate = d.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
+    this.isToday = d.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0);
   }
 }
 
@@ -22,17 +22,17 @@ export class CalendarDay {
 export class ChunkPipe implements PipeTransform {
 
   transform(calendarDaysArray: any, chunkSize: number): any {
-    let calendarDays = []
-    let weekDays = []
+    const calendarDays = [];
+    let weekDays = [];
 
     calendarDaysArray.map((day, index) => {
-      weekDays.push(day)
+      weekDays.push(day);
       if (++index % chunkSize === 0) {
-        calendarDays.push(weekDays)
-        weekDays = []
+        calendarDays.push(weekDays);
+        weekDays = [];
       }
-    })
-    return calendarDays
+    });
+    return calendarDays;
   }
 }
 
@@ -43,69 +43,86 @@ export class ChunkPipe implements PipeTransform {
 })
 export class CalendarComponent implements OnInit {
   public calendar: CalendarDay[] = [];
-  public monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+  public monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
   ];
+  public today = new Date();
+  public date: number;
+  public day: number;
+  public month: number;
+  public dayOfWeek: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  public numDayOfWeek: number;
   public displayMonth: string;
   public displayYear: number;
-  private monthIndex: number = 0;
+  public isWindow = false;
+  private monthIndex = 0;
 
   ngOnInit(): void {
     this.generateCalendarDays(this.monthIndex);
   }
 
   private generateCalendarDays(monthIndex: number): void {
-    // we reset our calendar
+    // reset our calendar
     this.calendar = [];
 
-    // we set the date
-    let day: Date = new Date(new Date().setMonth(new Date().getMonth() + monthIndex));
-
-    // set the dispaly month for UI
+    // set the date
+    const day: Date = new Date(new Date().setMonth(new Date().getMonth() + monthIndex));
+    this.month = day.getMonth();
+    // set the dispaly for UI
     this.displayMonth = this.monthNames[day.getMonth()];
     this.displayYear = day.getFullYear();
 
-    let startingDateOfCalendar = this.getStartDateForCalendar(day);
+    const startingDateOfCalendar = this.getStartDateForCalendar(day);
 
     let dateToAdd = startingDateOfCalendar;
 
-    for (var i = 0; i < 42; i++) {
+    for (let i = 0; i < 35; i++) {
       this.calendar.push(new CalendarDay(new Date(dateToAdd)));
       dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1));
     }
   }
 
-  private getStartDateForCalendar(selectedDate: Date){
-    // for the day we selected let's get the previous month last day
-    let lastDayOfPreviousMonth = new Date(selectedDate.setDate(0));
+  public setDay(): void {
+    this.today = new Date();
+}
 
-    // start by setting the starting date of the calendar same as the last day of previous month
+  // tslint:disable-next-line:typedef
+  private getStartDateForCalendar(selectedDate: Date){
+
+    const lastDayOfPreviousMonth = new Date(selectedDate.setDate(0));
+
     let startingDateOfCalendar: Date = lastDayOfPreviousMonth;
 
-    // but since we actually want to find the last Monday of previous month
-    // we will start going back in days intil we encounter our last Monday of previous month
-    if (startingDateOfCalendar.getDay() != 1) {
+    if (startingDateOfCalendar.getDay() !== 1) {
       do {
         startingDateOfCalendar = new Date(startingDateOfCalendar.setDate(startingDateOfCalendar.getDate() - 1));
-      } while (startingDateOfCalendar.getDay() != 1);
+      } while (startingDateOfCalendar.getDay() !== 1);
     }
 
     return startingDateOfCalendar;
   }
 
-  public increaseMonth() {
+  public increaseMonth(): any {
     this.monthIndex++;
     this.generateCalendarDays(this.monthIndex);
   }
 
-  public decreaseMonth() {
-    this.monthIndex--
+  public decreaseMonth(): any {
+    this.monthIndex--;
     this.generateCalendarDays(this.monthIndex);
   }
 
-  public setCurrentMonth() {
+  public setCurrentMonth(): any {
     this.monthIndex = 0;
     this.generateCalendarDays(this.monthIndex);
   }
 
+  click(event: MouseEvent): void {
+    const a = (event.target) as HTMLTableElement;
+    this.date = Number(a.textContent);
+    this.day = new Date(this.displayYear, this.month, this.date).getDay();
+    this.numDayOfWeek = [0, 1, 2, 3, 4, 5, 6][this.day];
+    this.isWindow = !this.isWindow;
+  }
 }
+

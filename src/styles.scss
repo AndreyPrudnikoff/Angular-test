@@ -1,14 +1,17 @@
-html {
-  height: 100vh;
-}
 body {
   padding: 50px 0;
   margin: 0;
   box-sizing: border-box;
-  height: 100vh;
-  overflow: hidden;
+  height: 94.8vh;
   font-family: 'Rubik', sans-serif;
   *, *:after, *:before {
     box-sizing: inherit;
   }
+}
+
+@media (max-width: 576px) {
+body {
+  padding: 10px;
+  height: 95vh;
+}
 }

@@ -1,5 +1,6 @@
 header {
   padding: 0 10%;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -14,7 +15,7 @@ header {
       list-style: none;
       a {
         text-decoration: none;
-        font-size: 28px;
+        font-size: 2vw;
         font-weight: 600;
         letter-spacing: 0.56px;
         color: #3D3D3D;
@@ -23,13 +24,13 @@ header {
       }
       a.active:before {
         content: "";
-        width: 15px;
-        height: 15px;
+        width: 1vw;
+        height: 1vw;
         border-radius: 50%;
         background-color: #FDD000;
         position: absolute;
-        bottom: -1rem;
-        left: calc(50% - 7.5px);
+        bottom: -1vw;
+        left: 50%;
       }
     }
   }
@@ -41,4 +42,13 @@ header {
   }
 }
 
-
+@media (max-width: 576px) {
+  header {
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  .wrap-logo {
+    width: 20vw;
+  }
+}

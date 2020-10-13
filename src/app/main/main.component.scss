@@ -2,17 +2,20 @@
   height: 100%;
   background-image: url("../../assets/main-bg.jpg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+  background-position: bottom;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  margin-top: 20px;
   &__content {
     width: 65vw;
+    height: 100%;
     text-align: right;
     padding-top: 10%;
     padding-right: 2em;
     h1 {
-      font: bold 50px Rubik;
+      font: bold 3vw Rubik;
       text-align: right;
       letter-spacing: 3.5px;
       color: #FDD000;
@@ -20,7 +23,8 @@
     }
     p {
       text-align: right;
-      font: normal 30px Rubik;
+      font: 2vw Rubik;
+      font-weight: lighter;
       letter-spacing: 0.6px;
       color: #DFDFDF;
     }
@@ -30,5 +34,30 @@
     background-color: #272829;
     height: 100%;
     color: #DFDFDF;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 576px) {
+  .main {
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 0;
+    &__content {
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: initial;
+      h1, p {
+        text-align: center;
+      }
+    }
+    &__calendar {
+      width: 100%;
+      padding-top: 10px;
+    }
   }
 }
