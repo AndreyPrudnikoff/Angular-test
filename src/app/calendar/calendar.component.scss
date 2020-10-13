@@ -1,0 +1,55 @@
+.calendar{
+  padding: 25% 5%;
+  .month {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding: 0 3vw;
+    div.arrow {
+      font-size: 2vw;
+      cursor: pointer;
+    }
+    &__name span {
+      line-height: 2vw;
+      text-align: center;
+      font: normal normal medium 1.5vw/23px Rubik;
+      color: #DFDFDF;
+      text-transform: uppercase;
+      margin: 5px;
+    }
+  }
+  .calendar-table {
+    width: 100%;
+    max-width: 100%;
+    tr td {
+      text-align: center;
+      padding: .5vw;
+      font-size: calc(.7vw * 1em);
+    }
+    tr .week {
+      font-weight: bold;
+      font-size: calc(1vw * 1em);
+    }
+  }
+}
+.calendar-day {
+  padding: 10px;
+  height: 7vh;
+  max-height: 10vh;
+  cursor: pointer;
+}
+
+.calendar-day.past-date {
+  background-color: rgb(248, 248, 248);
+}
+
+.calendar-day:hover {
+  background-color: #FDD000;
+}
+
+.blue-date {
+  background-color: #FDD000;
+  color: #3d3d3d;
+}
